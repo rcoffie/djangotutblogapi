@@ -28,4 +28,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include(router.urls)),
     path('article/',include('article.urls')),
+    path('news/',include('news.urls')),
 ]

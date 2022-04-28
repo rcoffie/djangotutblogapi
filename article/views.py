@@ -43,9 +43,11 @@ def article_details(request, pk, format=None):
 def update_article(request, pk, format=None):
     if request.method == "PUT":
         article = Article.objects.get(pk=pk)
-        serializer = ArticleSerializer(article)
-        return Response(serilizer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = ArticleSerializer(article, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serilizer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(["DELETE"])
