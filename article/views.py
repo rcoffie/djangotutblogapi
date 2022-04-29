@@ -43,7 +43,7 @@ def article_details(request, pk, format=None):
 def update_article(request, pk, format=None):
     if request.method == "PUT":
         article = Article.objects.get(pk=pk)
-        serializer = ArticleSerializer(article, data=data)
+        serializer = ArticleSerializer(article, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serilizer.data, status=status.HTTP_201_CREATED)
